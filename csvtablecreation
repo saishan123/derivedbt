@@ -1,0 +1,25 @@
+CREATE EXTERNAL TABLE IF NOT EXISTS s3db.month_src (
+    id INT,
+    name STRING,
+    jan INT,
+    feb INT,
+    mar INT,
+    apr INT,
+    may INT,
+    jun INT,
+    jul INT,
+    aug INT,
+    sep INT,
+    oct INT,
+    nov INT,
+    dec INT
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES (
+    "separatorChar" = ",",
+    "quoteChar" = "\"",
+    "escapeChar" = "\\"
+) 
+STORED AS TEXTFILE
+LOCATION 's3://stockdeta/dbtsources/'
+TBLPROPERTIES ('skip.header.line.count'='1');
